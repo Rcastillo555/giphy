@@ -4,22 +4,19 @@
 /* global $ */
 
 $("#search-button").click(function(){
- var here=    $("input").val(); 
-    $("#q4").click(function() { 
-$.ajax({
-    url: "https://api.giphy.com/v1/gifs/search?q="+here+"&rating=pg&api_key=dc6zaTOxFJmzC" , 
-    method : "GET" , 
-    success : function ( response ) { 
-        
- 
     
+    var searchTerm = $("#search-term").val();
+        
+    $.ajax({
+        url: "https://api.giphy.com/v1/gifs/search?q="+searchTerm+"&rating=pg&api_key=dc6zaTOxFJmzC" , 
+        method : "GET" , 
+        success : function ( response ) { 
+            var newdata= Math.floor(Math.random() *response.data.length );
+            var item= response.data[newdata];
+            $('.gallery').html(`<img src="${item.images['original'].url}"/>`);
+            $("#raw").html(response);
+        }
 
-console.log(dog);
-}
+    });
 
 });
-  
-  
-  
-});
-
